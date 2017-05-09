@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testing 1</title>
+</head>
+<body>
+
+
+<h1>This is the fucking shit </h1>
+
+<form>
+	<input type="number" name="name" required id="in1" min="100" max="1000">
+	<button onclick="myfucn()">Submit</button>
+
+	<h4>If the number is not correct generate error message </h4>
+
+	<p id="demo"></p>
+</form>
+
+<script>
+	
+	function myfucn(){
+		var input = document.getElementById('in1');
+		if(input.checkValidity()==false){
+
+			document.getElementById("demo").innerHTML= input.validationMessage;
+		}
+		else{
+			document.getElementById("demo").innerHTML="Input Ok";
+		}
+
+	}
+</script>
+</body>
+</html>
