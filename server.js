@@ -13,6 +13,8 @@ var AddCourse=require("./addCourse");
 
 var router = express.Router();
 
+var wait = require('waitfor');
+
 
 
 app.use(bodyParser.json());
@@ -26,31 +28,70 @@ router.get("/",function(req,res){
 
 
 
+
+
+
 // route will allow you to use the same path for different HTTp requests
 
 //So if you have same URL but with different HTTP OP such as POST,GET etc
 //Then use route() to remove redundant code.
 
 
-    router.get('/users',function(req,res){
+router.get('/users',function(req,res){
        // var response = {};
        // User.find({},function(err,data){
         // Mongo command to fetch all data from collection.
 
-              var response = {};
+        var response = {};
         User.find({},function(err,user){
         // Mongo command to fetch all data from collection.
-            if(err) {
-                response = {"error" : true,"message" : "Error fetching data"};
-            } else {
-                response = {"error" : false,"message" : User};
-            }
-            res.json(response);
-        });
+        if(err) {
+            response = {"error" : true,"message" : "Error fetching data"};
+        } else {
+            response = {"error" : false,"message" : User};
+        }
+        res.json(response);
+    });
         //});
     })
 
-   
+// router.get('/myCalender',function(req,res){
+//     res.sendfile("./timetable.html");
+// });
+////////////////////////////////////////////////////////////////////////////////////////////
+//router.post("/login")
+// the login fucnion to check for the user login credentials 
+router.get('/myCalender',function(req,res){
+       // var response = {};
+       // User.find({},function(err,data){
+        // Mongo command to fetch all data from collection.
+        console.log("asfsa");
+        var response = {};
+        var Erollno = req.params.rollno;
+        Course.find({rollno:"es14btech11010"} , function(err, courseInfo){
+            if(err){
+                response = {"error" : true , "message" : "No courses found under the given rollno"};
+            }else{
+                response = {"error" : false , "message" : "data found"};
+            }
+            var out = [];
+            //console.log(courseInfo);
+            for (var i in courseInfo){
+                var name = courseInfo[i].course;
+                console.log(name , " hooola");
+                if(name){
+                    AddCourse.findOne({course : name}, function(err, in1){
+                        if(!err){
+                            console.log(in1);
+                            out.push(in1);
+                        }
+                    });
+            }   }
+            console.log(out);
+            res.json(out);    
+        });
+        
+});
 
 router.get('/login',function(req,res){
 
@@ -59,21 +100,22 @@ router.get('/login',function(req,res){
 ////////////////////////////////////////////////////////////////////////////////////////////
 //router.post("/login")
 // the login fucnion to check for the user login credentials 
-    router.post('/login',function(req,res){
+router.post('/login',function(req,res){
        // var response = {};
        // User.find({},function(err,data){
         // Mongo command to fetch all data from collection.
-              var response = {};
+        var response = {};
         var Erollno = req.body.rollno;
-    var Epassword = req.body.password;
-
-    User.findOne({rollno:Erollno,password:Epassword},function(err,user){
-
-         if(err) {
+        var Epassword = req.body.password;
+ console.log("asfsa" , Erollno)
+        User.findOne({rollno:Erollno,password:Epassword},function(err,user){
+            console.log(err);
+            if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
             } else {
-                response = {"error" : false,"message" : user+"logged in"};
+                response = {"error" : false,"message" : "logged in"};
             }
+            console.log(user);
             res.json(response);
     });
 
@@ -81,45 +123,45 @@ router.get('/login',function(req,res){
 
   // console.log("successfully loged in");
         //});
-    });
+});
 
 
 router.get('/register',function(req,res){
-     res.sendfile("./register.html");
+ res.sendfile("./register.html");
 });
 
 
 // user resgitration fusntion . new users are added here 
-    router.post('/register',function(req,res){
-        var newUser = new User();
-        var response = {};
+router.post('/register',function(req,res){
+    var newUser = new User();
+    var response = {};
         // fetch email and password from REST request.
         // Add strict validation when you use this in Production.
         newUser.rollno = req.body.rollno; 
         // Hash the password using SHA1 algorithm.
         newUser.password = req.body.password;
-       newUser.email = req.body.email;
-       console.log("did u get shcocked");
-       newUser.name = req.body.name;
-       newUser.branch = req.body.branch;
-                          
+        newUser.email = req.body.email;
+        console.log("did u get shcocked");
+        newUser.name = req.body.name;
+        newUser.branch = req.body.branch;
 
-       console.log(newUser);
-		
+
+        console.log(newUser);
+
 		//md5(non_existant); // This variable does not exist
        // sha1(non_existant);                  
-        newUser.save(function(err){
+       newUser.save(function(err){
         // save() will run insert() command of MongoDB.
         // it will add new data in collection.
         console.log("did u get fuckedup");
-            if(err) {
-                response = {"error" : true,"message" : err};
-            } else {
-                response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
-            }
-            res.json(response);
-        });
+        if(err) {
+            response = {"error" : true,"message" : err};
+        } else {
+            response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
+        }
+        res.json(response);
     });
+   });
 
 // add the course to the data base from Professor
 
@@ -139,52 +181,52 @@ router.post('/profCAdd',function(req,res){
     console.log(req.body.day);
     newUser.save(function(err){
 
-if(err) {
-                response = {"error" : true,"message" : err};
-            } else {
-                response = {"error" : false,"message" : "Course Added "};
-            }
-            res.json(response);
+        if(err) {
+            response = {"error" : true,"message" : err};
+        } else {
+            response = {"error" : false,"message" : "Course Added "};
+        }
+        res.json(response);
     });
 
 });
 
 
 router.get('/facultySignup',function(req,res){
-     res.sendfile("./facultySignup.html");
+ res.sendfile("./facultySignup.html");
 });
 
 // Faculty resgitration function . new users are added here 
-    router.post('/facultySignup',function(req,res){
-        var newUser = new Faculty();
-        var response = {};
+router.post('/facultySignup',function(req,res){
+    var newUser = new Faculty();
+    var response = {};
         // fetch email and password from REST request.
         // Add strict validation when you use this in Production.
         newUser.email = req.body.email; 
         // Hash the password using SHA1 algorithm.
         newUser.password = req.body.password;
-       console.log("did u get shcocked");
-       newUser.name = req.body.name;
-       newUser.branch = req.body.branch;
-                          
+        console.log("did u get shcocked");
+        newUser.name = req.body.name;
+        newUser.branch = req.body.branch;
 
-       console.log(newUser);
+
+        console.log(newUser);
         
         //md5(non_existant); // This variable does not exist
        // sha1(non_existant);                  
-        newUser.save(function(err){
+       newUser.save(function(err){
         // save() will run insert() command of MongoDB.
         // it will add new data in collection.
         console.log("did u get fuckedup");
-            if(err) {
-                response = {"error" : true,"message" : err};
-            } else {
-                response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
-            }
+        if(err) {
+            response = {"error" : true,"message" : err};
+        } else {
+            response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
+        }
            // res.json(response);
-            res.sendfile('facultyCoursesAdd.html');
-        });
-    });
+           res.sendfile('facultyCoursesAdd.html');
+       });
+   });
 
 
 
@@ -199,25 +241,25 @@ router.get('/facultyLogin',function(req,res){
 ////////////////////////////////////////////////////////////////////////////////////////////
 //router.post("/login")
 // the login fucnion to check for the user login credentials 
-    router.post('/facultyLogin',function(req,res){
+router.post('/facultyLogin',function(req,res){
        // var response = {};
        // User.find({},function(err,data){
         // Mongo command to fetch all data from collection.
-              var response = {};
+        var response = {};
         var Eemail = req.body.email;
-    var Epassword = req.body.password;
- 
-    Faculty.findOne({Eemail:email,Epassword:password},function(err,user){
+        var Epassword = req.body.password;
+
+        Faculty.findOne({Eemail:email,Epassword:password},function(err,user){
 
          if(err) {
-                response = {"error" : true,"message" : "Error fetching data"};
-            } else {
-                response = {"error" : false,"message" : user};
-            }
-            res.json(response);
+            response = {"error" : true,"message" : "Error fetching data"};
+        } else {
+            response = {"error" : false,"message" : user};
+        }
+        res.json(response);
     })
 
-    console.log("successfully loged in");
+        console.log("successfully loged in");
         //});
     })
 
@@ -239,49 +281,49 @@ router.get('/facultyLogin',function(req,res){
 // Courses adding here with this code
 
 // user resgitration fusntion . new users are added here 
-    router.post('/users/courses',function(req,res){
-        var course = new Course();
-        var response = {};
+router.post('/users/courses',function(req,res){
+    var course = new Course();
+    var response = {};
         // fetch email and password from REST request.
         // Add strict validation when you use this in Production.
         course.rollno = req.body.rollno; 
         // Hash the password using SHA1 algorithm.
-       course.course = req.body.course;
-                            
+        course.course = req.body.course;
+
         //md5(non_existant); // This variable does not exist
        // sha1(non_existant);                  
-        course.save(function(err){
+       course.save(function(err){
         // save() will run insert() command of MongoDB.
         // it will add new data in collection.
-            if(err) {
-                response = {"error" : true,"message" : err};
-            } else {
-                response = {"error" : false,"message" : "Data added"};
-            }
-            res.json(response);
-        });
+        if(err) {
+            response = {"error" : true,"message" : err};
+        } else {
+            response = {"error" : false,"message" : "Data added"};
+        }
+        res.json(response);
     });
+   });
 
 // courses adding ends here
 
 router.route("/users/:id")
-    .get(function(req,res){
-        var response = {};
-        User.findById(req.params.id,function(err,data){
+.get(function(req,res){
+    var response = {};
+    User.findById(req.params.id,function(err,data){
         // This will run Mongo Query to fetch data based on ID.
-            if(err) {
-                response = {"error" : true,"message" : "Error fetching data"};
-            } else {
-                response = {"error" : false,"message" : data};
-            }
-            res.json(response);
-        });
-    })
+        if(err) {
+            response = {"error" : true,"message" : "Error fetching data"};
+        } else {
+            response = {"error" : false,"message" : data};
+        }
+        res.json(response);
+    });
+})
 
 // the put fucntion to update the users information
-    .put(function(req,res){
+.put(function(req,res){
 
-    	var response= {};
+ var response= {};
 
     	// first lets check for the record exists or not 
     	// if it does then update it
@@ -319,8 +361,8 @@ router.route("/users/:id")
 
     })
 
-    .delete(function(req,res){
-        var response = {};
+.delete(function(req,res){
+    var response = {};
         // find the data
         User.findById(req.params.id,function(err,data){
             if(err) {
