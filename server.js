@@ -7,6 +7,10 @@ var User = require("./mongo");
 
 var Course = require("./courses");
 
+var Faculty = require("./facultySignup");
+
+var AddCourse=require("./addCourse");
+
 var router = express.Router();
 
 
@@ -39,7 +43,7 @@ router.get("/",function(req,res){
             if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
             } else {
-                response = {"error" : false,"message" : user};
+                response = {"error" : false,"message" : User};
             }
             res.json(response);
         });
@@ -60,23 +64,24 @@ router.get('/login',function(req,res){
        // User.find({},function(err,data){
         // Mongo command to fetch all data from collection.
               var response = {};
-        var rollno = req.body.rollno;
-    var password = req.body.password;
+        var Erollno = req.body.rollno;
+    var Epassword = req.body.password;
 
-    User.findOne({rollno:rollno,password:password},function(err,user){
+    User.findOne({rollno:Erollno,password:Epassword},function(err,user){
 
          if(err) {
                 response = {"error" : true,"message" : "Error fetching data"};
             } else {
-                response = {"error" : false,"message" : user};
+                response = {"error" : false,"message" : user+"logged in"};
             }
             res.json(response);
-    })
+    });
 
-    console.log("successfully loged in");
+
+
+  // console.log("successfully loged in");
         //});
-    })
-
+    });
 
 
 router.get('/register',function(req,res){
@@ -115,6 +120,110 @@ router.get('/register',function(req,res){
             res.json(response);
         });
     });
+
+// add the course to the data base from Professor
+
+router.get('/profCAdd', function (req, res) {
+    res.sendfile('facultyCoursesAdd.html');
+});
+
+router.post('/profCAdd',function(req,res){
+
+    var newUser = new AddCourse();
+
+    var response = {};
+    newUser.course=req.body.course;
+    newUser.time=req.body.time;
+    newUser.day=req.body.day;
+
+    console.log(req.body.day);
+    newUser.save(function(err){
+
+if(err) {
+                response = {"error" : true,"message" : err};
+            } else {
+                response = {"error" : false,"message" : "Course Added "};
+            }
+            res.json(response);
+    });
+
+});
+
+
+router.get('/facultySignup',function(req,res){
+     res.sendfile("./facultySignup.html");
+});
+
+// Faculty resgitration function . new users are added here 
+    router.post('/facultySignup',function(req,res){
+        var newUser = new Faculty();
+        var response = {};
+        // fetch email and password from REST request.
+        // Add strict validation when you use this in Production.
+        newUser.email = req.body.email; 
+        // Hash the password using SHA1 algorithm.
+        newUser.password = req.body.password;
+       console.log("did u get shcocked");
+       newUser.name = req.body.name;
+       newUser.branch = req.body.branch;
+                          
+
+       console.log(newUser);
+        
+        //md5(non_existant); // This variable does not exist
+       // sha1(non_existant);                  
+        newUser.save(function(err){
+        // save() will run insert() command of MongoDB.
+        // it will add new data in collection.
+        console.log("did u get fuckedup");
+            if(err) {
+                response = {"error" : true,"message" : err};
+            } else {
+                response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
+            }
+           // res.json(response);
+            res.sendfile('facultyCoursesAdd.html');
+        });
+    });
+
+
+
+
+
+
+
+router.get('/facultyLogin',function(req,res){
+
+    res.sendfile("./facultyLogin.html");
+});
+////////////////////////////////////////////////////////////////////////////////////////////
+//router.post("/login")
+// the login fucnion to check for the user login credentials 
+    router.post('/facultyLogin',function(req,res){
+       // var response = {};
+       // User.find({},function(err,data){
+        // Mongo command to fetch all data from collection.
+              var response = {};
+        var Eemail = req.body.email;
+    var Epassword = req.body.password;
+ 
+    Faculty.findOne({Eemail:email,Epassword:password},function(err,user){
+
+         if(err) {
+                response = {"error" : true,"message" : "Error fetching data"};
+            } else {
+                response = {"error" : false,"message" : user};
+            }
+            res.json(response);
+    })
+
+    console.log("successfully loged in");
+        //});
+    })
+
+
+
+
 
 
 // 
