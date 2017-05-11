@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({"estended ": false}));
 
 router.get("/",function(req,res){
 
-	res.json({"error":false, "message ": "Hello world"});
+	res.sendfile("./index.html")
 });
 
 
@@ -68,7 +68,7 @@ router.get('/myCalender',function(req,res){
         console.log("asfsa");
         var response = {};
         var Erollno = req.params.rollno;
-        Course.find({rollno:"es14btech11010"} , function(err, courseInfo){
+        Course.find({rollno:"es14btech11012"} , function(err, courseInfo){
             if(err){
                 response = {"error" : true , "message" : "No courses found under the given rollno"};
             }else{
@@ -78,15 +78,11 @@ router.get('/myCalender',function(req,res){
             //console.log(courseInfo);
             for (var i in courseInfo){
                 var name = courseInfo[i].course;
-                console.log(name , " hooola");
-                if(name){
-                    AddCourse.findOne({course : name}, function(err, in1){
-                        if(!err){
-                            console.log(in1);
-                            out.push(in1);
-                        }
-                    });
-            }   }
+                var rollno=courseInfo[i].rollno;
+                var time=courseInfo[i].time;
+                var day=courseInfo[i].day;
+                console.log(name , rollno,time , day, " hooola");
+                   }
             console.log(out);
             res.json(out);    
         });
@@ -95,7 +91,7 @@ router.get('/myCalender',function(req,res){
 
 router.get('/login',function(req,res){
 
-    res.sendfile("./login.html");
+    res.sendfile("./student.html");
 });
 ////////////////////////////////////////////////////////////////////////////////////////////
 //router.post("/login")
@@ -116,7 +112,7 @@ router.post('/login',function(req,res){
                 response = {"error" : false,"message" : "logged in"};
             }
             console.log(user);
-            res.json(response);
+           res.sendFile('./shubham.html');
     });
 
 
@@ -236,7 +232,7 @@ router.post('/facultySignup',function(req,res){
 
 router.get('/facultyLogin',function(req,res){
 
-    res.sendfile("./facultyLogin.html");
+    res.sendfile("./faculty.html");
 });
 ////////////////////////////////////////////////////////////////////////////////////////////
 //router.post("/login")
@@ -289,6 +285,8 @@ router.post('/users/courses',function(req,res){
         course.rollno = req.body.rollno; 
         // Hash the password using SHA1 algorithm.
         course.course = req.body.course;
+        course.time=req.body.time;
+    course.day=req.body.day;
 
         //md5(non_existant); // This variable does not exist
        // sha1(non_existant);                  

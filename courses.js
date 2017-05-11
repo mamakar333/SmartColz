@@ -8,7 +8,9 @@ var mongoSchema= mongoose.Schema;
 var studentCourses = {
 
 	"rollno": String ,
-	"course" : String
+	"course" : String,
+	"time": String,
+	"day" : String
 
 }
 

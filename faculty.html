@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <title>Calm breeze login screen</title>
   
-  
-    <style>
+  <style>
   	@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 * {
   box-sizing: border-box;
@@ -240,7 +239,8 @@ form button:hover {
 
   </style>
   
->
+     <!-- <link rel="stylesheet" href="css/style.css"> -->
+
   
 </head>
 
@@ -248,13 +248,12 @@ form button:hover {
   <div class="wrapper">
 	<div class="container">
 		<h1>Welcome</h1>
+		<form class="form" action="/facultyLogin" method="post">
 		
-		<form class="form" action="/facultySignup" method="post">
-			<input type="email" placeholder="Email" name="email" required>
-			<input type="password" placeholder="Password" name="password" required>
-			<input type="text" name="name" placeholder="Name" required>
-			<input type="text" name="branch" placeholder="Branch" required><br>
-			<input type="submit" name="submit" value="Login" style="color: red ">
+			<input type="email" placeholder="Email" name="email">
+			<input type="password" placeholder="Password" name="password">
+			<input type="submit" id="login-button" name="submit" value="Login">
+			<a href="facultySignup">Not a member yet Register Here</a>
 		</form>
 	</div>
 	
@@ -280,7 +279,7 @@ form button:hover {
 	 $('form').fadeOut(500);
 	 $('.wrapper').addClass('form-success');
 });
-    </script
+    </script>
 
 </body>
 </html>

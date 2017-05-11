@@ -5,7 +5,8 @@
   <title>Calm breeze login screen</title>
   
   
-    <style>
+  
+     <style>
   	@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 * {
   box-sizing: border-box;
@@ -240,7 +241,7 @@ form button:hover {
 
   </style>
   
->
+
   
 </head>
 
@@ -249,12 +250,9 @@ form button:hover {
 	<div class="container">
 		<h1>Welcome</h1>
 		
-		<form class="form" action="/facultySignup" method="post">
-			<input type="email" placeholder="Email" name="email" required>
-			<input type="password" placeholder="Password" name="password" required>
-			<input type="text" name="name" placeholder="Name" required>
-			<input type="text" name="branch" placeholder="Branch" required><br>
-			<input type="submit" name="submit" value="Login" style="color: red ">
+		<form class="form">
+			<button type="submit" id="login-Student"><a href="student.html">Student</a></button>
+			<button type="submit" id="login-Faculty"><a href="faculty.html">Faculty</a></button>
 		</form>
 	</div>
 	
