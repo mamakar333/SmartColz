@@ -111,8 +111,9 @@ router.post('/login',function(req,res){
             } else {
                 response = {"error" : false,"message" : "logged in"};
             }
-            console.log(user);
-           res.sendFile('./shubham.html');
+            //console.log(user);
+          res.sendfile('./courses.html');
+
     });
 
 
@@ -153,9 +154,10 @@ router.post('/register',function(req,res){
         if(err) {
             response = {"error" : true,"message" : err};
         } else {
-            response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
+            response = {"error" : false,"message" : "Data added go check ur data "};
         }
-        res.json(response);
+        res.sendfile('./courses.html');
+
     });
    });
 
@@ -217,10 +219,10 @@ router.post('/facultySignup',function(req,res){
         if(err) {
             response = {"error" : true,"message" : err};
         } else {
-            response = {"error" : false,"message" : "Data added mother fucker go check ur data "};
+            response = {"error" : false,"message" : "Data added check ur data "};
         }
            // res.json(response);
-           res.sendfile('facultyCoursesAdd.html');
+           res.get('facultyCoursesAdd.html');
        });
    });
 
@@ -252,17 +254,12 @@ router.post('/facultyLogin',function(req,res){
         } else {
             response = {"error" : false,"message" : user};
         }
-        res.json(response);
+       res.get('facultyCoursesAdd.html');
     })
 
-        console.log("successfully loged in");
+       // console.log("successfully loged in");
         //});
     })
-
-
-
-
-
 
 // 
  // getting the courses of a student 
