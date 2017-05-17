@@ -55,6 +55,8 @@ router.get('/users',function(req,res){
         //});
     })
 
+
+
 // router.get('/myCalender',function(req,res){
 //     res.sendfile("./timetable.html");
 // });
@@ -65,10 +67,10 @@ router.get('/myCalender',function(req,res){
        // var response = {};
        // User.find({},function(err,data){
         // Mongo command to fetch all data from collection.
-        console.log("asfsa");
+        console.log("ES14BTECH11010 courses are");
         var response = {};
-        var Erollno = req.params.rollno;
-        Course.find({rollno:"es14btech11012"} , function(err, courseInfo){
+        //var Erollno = req.body.rollno;
+        Course.find({rollno:"es14btech11010"} , function(err, courseInfo){
             if(err){
                 response = {"error" : true , "message" : "No courses found under the given rollno"};
             }else{
