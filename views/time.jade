@@ -1,49 +1,39 @@
-- var M9=""
-- var M10=""
-- var M11=""
-- var M12=""
-- var M230=""
-- var M4=""
-- var T9=""
-- var T10=""
-- var T11=""
-- var T12=""
-- var T230=""
-- var T4=""
-- var W9=""
-- var W10=""
-- var W11=""
-- var W12=""
-- var W230=""
-- var W4=""
-- var TH9=""
-- var TH10=""
-- var TH11=""
-- var TH12=""
-- var TH1=""
-- var TH230=""
-- var TH4=""
-- var M1=""
-- var T1=""
-- var W1=""
-- var F9=""
-- var F10=""
-- var F11=""
-- var F12=""
-- var F1=""
-- var F230=""
-- var F4=""
-table(border='1')
-	thead
-		th #
-		th 9:00-10:00
-		th 10:00-11:00
-		th 11:00-12:00
-		th 12:00-01:00
-		th 01:00-02:30
-		th 02:30-04:00
-		th 04:00-05:30
-	tbody
+script.
+	- var M9=""
+	- var M10=""
+	- var M11=""
+	- var M12=""
+	- var M230=""
+	- var M4=""
+	- var T9=""
+	- var T10=""
+	- var T11=""
+	- var T12=""
+	- var T230=""
+	- var T4=""
+	- var W9=""
+	- var W10=""
+	- var W11=""
+	- var W12=""
+	- var W230=""
+	- var W4=""
+	- var TH9=""
+	- var TH10=""
+	- var TH11=""
+	- var TH12=""
+	- var TH1=""
+	- var TH230=""
+	- var TH4=""
+	- var M1=""
+	- var T1=""
+	- var W1=""
+	- var F9=""
+	- var F10=""
+	- var F11=""
+	- var F12=""
+	- var F1=""
+	- var F230=""
+	- var F4=""
 	each course in courses
 		if(course.day=="Monday")
 			if(course.time=="09:00")
@@ -120,6 +110,17 @@ table(border='1')
 				F230=course.course
 			if(course.time=="04:00")
 				F4=course.course
+table(border='1')
+	thead
+		th #
+		th 9:00-10:00
+		th 10:00-11:00
+		th 11:00-12:00
+		th 12:00-01:00
+		th 01:00-02:30
+		th 02:30-04:00
+		th 04:00-05:30
+	tbody
 		tr
 			td=Monday
 			td=M9

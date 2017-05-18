@@ -1,9 +1,26 @@
 table(border='1')
+	thead
+		th #
+		th 9:00-10:00
+		th 10:00-11:00
+		th 11:00-12:00
+		th 12:00-01:00
+		th 01:00-02:30
+		th 02:30-04:00
+		th 04:00-05:30
+	tbody
 	each course in courses
-		thead
-			th=course.time
-		tbody
-			tr
-				td=course.day
-				td=course.course		
-			
+		if(course.day=="Monday")
+			tr		
+				if(course.time=="09:00")
+					td=course.course
+				if(course.time=="10:00")
+					td=course.course
+				if(course.time=="11:00")
+					td=course.course
+				if(course.time=="12:00")
+					td=course.course
+				if(course.time=="02:30")
+					td=course.course
+				if(course.time=="04:00")
+					td=course.course				
