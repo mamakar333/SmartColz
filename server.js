@@ -15,7 +15,7 @@ var router = express.Router();
 
 var wait = require('waitfor');
 
-
+app.set('view engine','jade');
 
 app.use(bodyParser.json());
 
@@ -86,7 +86,8 @@ router.get('/myCalender',function(req,res){
                 console.log(name , rollno,time , day, " hooola");
                    }
             console.log(out);
-            res.json(out);    
+            res.render('timetable',{courses:courseInfo})
+           // res.json(out);    
         });
         
 });

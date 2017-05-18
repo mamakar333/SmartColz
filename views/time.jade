@@ -1,0 +1,131 @@
+- var M9=""
+- var M10=""
+- var M11=""
+- var M12=""
+- var M230=""
+- var M4=""
+- var T9=""
+- var T10=""
+- var T11=""
+- var T12=""
+- var T230=""
+- var T4=""
+- var W9=""
+- var W10=""
+- var W11=""
+- var W12=""
+- var W230=""
+- var W4=""
+- var TH9=""
+- var TH10=""
+- var TH11=""
+- var TH12=""
+- var TH1=""
+- var TH230=""
+- var TH4=""
+- var M1=""
+- var T1=""
+- var W1=""
+- var F9=""
+- var F10=""
+- var F11=""
+- var F12=""
+- var F1=""
+- var F230=""
+- var F4=""
+table(border='1')
+	thead
+		th #
+		th 9:00-10:00
+		th 10:00-11:00
+		th 11:00-12:00
+		th 12:00-01:00
+		th 01:00-02:30
+		th 02:30-04:00
+		th 04:00-05:30
+	tbody
+	each course in courses
+		if(course.day=="Monday")
+			if(course.time=="09:00")
+				M9 =course.course
+			if(course.time=="10:00")
+				M10=course.course
+			if(course.time=="11:00")
+				M11=course.course
+			if(course.time=="12:00")
+				M12=course.course
+			if(course.time=="02:30")
+				M230=course.course
+			if(course.time=="01:00")
+				M1=course.course	
+			if(course.time=="04:00")
+				M4=course.course
+		if(course.day=="Tuesday")
+			if(course.time=="09:00")
+				T9 =course.course
+			if(course.time=="10:00")
+				T10=course.course
+			if(course.time=="11:00")
+				T11=course.course
+			if(course.time=="12:00")
+				T12=course.course
+			if(course.time=="01:00")
+				T1=course.course	
+			if(course.time=="02:30")
+				T230=course.course
+			if(course.time=="04:00")
+				T4=course.course
+		if(course.day=="Wednesday")
+			if(course.time=="09:00")
+				W9 =course.course
+			if(course.time=="10:00")
+				W10=course.course
+			if(course.time=="11:00")
+				W11=course.course
+			if(course.time=="12:00")
+				W12=course.course
+			if(course.time=="01:00")
+				W1=course.course	
+			if(course.time=="02:30")
+				W230=course.course
+			if(course.time=="04:00")
+				W4=course.course
+		if(course.day=="Thrusday")
+			if(course.time=="09:00")
+				TH9 =course.course
+			if(course.time=="10:00")
+				TH10=course.course
+			if(course.time=="11:00")
+				TH11=course.course
+			if(course.time=="12:00")
+				TH12=course.course
+			if(course.time=="01:00")
+				TH1=course.course	 
+			if(course.time=="02:30")
+				TH230=course.course
+			if(course.time=="04:00")
+				TH4=course.course
+		if(course.day=="Friday")
+			if(course.time=="09:00")
+				F9 =course.course
+			if(course.time=="10:00")
+				F10=course.course
+			if(course.time=="11:00")
+				F11=course.course
+			if(course.time=="12:00")
+				F12=course.course
+			if(course.time=="01:00")
+				F1=course.course	 
+			if(course.time=="02:30")
+				F230=course.course
+			if(course.time=="04:00")
+				F4=course.course
+		tr
+			td=Monday
+			td=M9
+			td=M10
+			td=M11
+			td=M12
+			td=M1
+			td=M230
+			td=M4		
